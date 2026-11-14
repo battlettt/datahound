@@ -1,0 +1,22 @@
+{
+  "primary_key": "order_id",
+  "defaults": {
+    "max_null_rate": 0.05,
+    "max_empty_rate": 0.0
+  },
+  "max_duplicate_row_rate": 0.0,
+  "columns": {
+    "order_id": { "type": "integer", "required": true },
+    "customer_email": { "max_null_rate": 0.02, "pattern": "[^@\\s]+@[^@\\s]+\\.[a-z]+" },
+    "country": { "code": true, "case": "upper", "allowed": ["US", "CA", "GB", "DE", "FR", "MX"] },
+    "status": { "allowed": ["paid", "pending", "refunded", "shipped"] },
+    "amount": { "type": "number", "min": 0, "max": 5000 },
+    "order_date": { "type": "date", "format": "%Y-%m-%d", "min": "2026-01-01", "max": "2026-12-31" },
+    "coupon_code": { "max_null_rate": 1.0, "severity": "warning" }
+  },
+  "drift": {
+    "row_count": 0.2,
+    "null_rate": 0.05,
+    "mean": 0.25
+  }
+}
